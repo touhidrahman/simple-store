@@ -1,0 +1,70 @@
+{
+    "name": "@touhidrahman/simple-store",
+    "version": "1.0.0",
+    "description": "Simple store for managing state with Angular.",
+    "type": "module",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        }
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "scripts": {
+        "build": "tsc -p tsconfig.json",
+        "clean": "rimraf dist || rm -rf dist",
+        "dev": "tsx watch src/index.ts",
+        "f": "pnpm run format",
+        "format": "biome check . --write --unsafe --diagnostic-level=error",
+        "githook": "pnpm lefthook install",
+        "in": "pnpm i && pnpm githook",
+        "lint": "biome lint . --skip=suspicious/noExplicitAny",
+        "preinstall": "npx only-allow pnpm"
+    },
+    "author": "Touhid Rahman <hello@touhidrahman.me>",
+    "license": "MIT",
+    "engines": {
+        "node": ">=22"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/touhidrahman/simple-store.git"
+    },
+    "bugs": {
+        "url": "https://github.com/touhidrahman/simple-store/issues"
+    },
+    "keywords": [
+        "layout",
+        "sfc",
+        "fhx",
+        "pfc",
+        "flowchart",
+        "diagram",
+        "step",
+        "transition",
+        "graph"
+    ],
+    "packageManager": "pnpm@10.24.0",
+    "devDependencies": {
+        "@biomejs/biome": "2.3.8",
+        "@types/node": "^24.10.1",
+        "lefthook": "^2.0.5",
+        "rimraf": "^6.1.2",
+        "tsx": "^4.21.0",
+        "typescript": "^5.9.3"
+    },
+    "optionalDependencies": {
+        "@biomejs/cli-darwin-x64": "~2.3.8",
+        "@biomejs/cli-linux-x64": "~2.3.8",
+        "@biomejs/cli-win32-x64": "~2.3.8"
+    }
+}

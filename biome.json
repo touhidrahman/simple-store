@@ -1,0 +1,127 @@
+{
+    "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "assist": {
+        "actions": {
+            "source": {
+                "organizeImports": "on"
+            }
+        }
+    },
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "style": {
+                "useImportType": "off",
+                "noParameterAssign": "error",
+                "useAsConstAssertion": "error",
+                "useDefaultParameterLast": "error",
+                "useEnumInitializers": "error",
+                "useSelfClosingElements": "error",
+                "useSingleVarDeclarator": "error",
+                "noUnusedTemplateLiteral": "error",
+                "useNumberNamespace": "error",
+                "noInferrableTypes": "error",
+                "noUselessElse": "error"
+            },
+            "complexity": {
+                "useLiteralKeys": "off",
+                "noForEach": "off"
+            },
+            "suspicious": {
+                "noDebugger": "off",
+                "noExplicitAny": "info",
+                "noConsole": {
+                    "level": "info",
+                    "options": {
+                        "allow": ["log", "error"]
+                    }
+                }
+            },
+            "correctness": {
+                "noUnusedVariables": {
+                    "level": "warn",
+                    "fix": "none",
+                    "options": {
+                        "ignoreRestSiblings": true
+                    }
+                },
+                "noUnusedPrivateClassMembers": {
+                    "level": "warn",
+                    "fix": "none"
+                }
+            }
+        },
+        "includes": ["**", "!!dist/**/*.*", "!!assets/**/*.*"]
+    },
+    "formatter": {
+        "enabled": true,
+        "formatWithErrors": false,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 100,
+        "includes": ["**"],
+        "lineEnding": "lf",
+        "attributePosition": "auto"
+    },
+    "javascript": {
+        "parser": {
+            "unsafeParameterDecoratorsEnabled": true
+        },
+        "formatter": {
+            "semicolons": "asNeeded",
+            "quoteStyle": "single",
+            "arrowParentheses": "always",
+            "bracketSameLine": false,
+            "bracketSpacing": true,
+            "jsxQuoteStyle": "double",
+            "quoteProperties": "asNeeded",
+            "trailingCommas": "all"
+        }
+    },
+    "html": {
+        "experimentalFullSupportEnabled": true,
+        "parser": {
+            "interpolation": true
+        },
+        "formatter": {
+            "enabled": false,
+            "indentScriptAndStyle": true
+        }
+    },
+    "json": {
+        "parser": {
+            "allowComments": true,
+            "allowTrailingCommas": true
+        },
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4,
+            "lineWidth": 100,
+            "lineEnding": "lf"
+        }
+    },
+    "css": {
+        "parser": {
+            "tailwindDirectives": true
+        },
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4,
+            "lineWidth": 100
+        },
+        "linter": {
+            "enabled": false
+        },
+        "assist": {
+            "enabled": false
+        }
+    }
+}

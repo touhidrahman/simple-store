@@ -1,0 +1,17 @@
+# Add files here to ignore them from prettier formatting
+/dist
+/coverage
+/.nx/cache
+.angular
+
+/.nx/workspace-data
+pnpm-lock.yaml
+
+# biome formats these files so ignore from prettier
+**/*.ts
+**/*.js
+**/*.md
+**/*.mjs
+**/*.cjs
+**/*.css
+# **/*.scss # not yet supported by biome
