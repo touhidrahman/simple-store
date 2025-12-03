@@ -2,7 +2,7 @@ import { isEqual } from 'es-toolkit'
 import { distinctUntilChanged, filter, map, Observable, Subject, share, takeUntil } from 'rxjs'
 import { StateSubject } from './state-subject'
 
-export class SimpleStore<T> {
+export class SimpleStore<T extends Record<string, unknown>> {
     private unsubscriber: Subject<void>
     private state: StateSubject<T>
 
