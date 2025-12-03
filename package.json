@@ -24,7 +24,10 @@
         "githook": "pnpm lefthook install",
         "in": "pnpm i && pnpm githook",
         "lint": "biome lint . --skip=suspicious/noExplicitAny",
-        "preinstall": "npx only-allow pnpm"
+        "preinstall": "npx only-allow pnpm",
+        "release:patch": "pnpm clean && pnpm build && pnpm version patch && git push && git push --tags && pnpm publish --access public",
+        "release:minor": "pnpm clean && pnpm build && pnpm version minor && git push && git push --tags && pnpm publish --access public",
+        "release:major": "pnpm clean && pnpm build && pnpm version major && git push && git push --tags && pnpm publish --access public"
     },
     "author": "Touhid Rahman <hello@touhidrahman.me>",
     "license": "MIT",
