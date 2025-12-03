@@ -4,9 +4,9 @@ import { Observable } from 'rxjs'
 import { SimpleStore } from './simple-store'
 
 export class QueryResultStore<
-    Q extends Record<string, unknown>,
-    R extends Record<string, unknown>,
-    T extends Record<string, unknown>,
+    Q extends Record<string, any>,
+    R extends Record<string, any>,
+    T extends Record<string, any>,
 > extends SimpleStore<{
     query: Q
     result: R
