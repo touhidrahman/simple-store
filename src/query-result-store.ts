@@ -1,7 +1,6 @@
-import { omitBy } from 'es-toolkit'
-import qs from 'qs'
 import { Observable } from 'rxjs'
 import { SimpleStore } from './simple-store'
+import { removeOldestEntry, serializeObject } from './util'
 
 /**
  * A specialized store for managing the state of a query, its results, and any transient data.
@@ -34,6 +33,13 @@ export class QueryResultStore<
      * @type {boolean}
      */
     protected useCaching = false
+
+    /**
+     * In-memory cache limit. Default is 100
+     * @protected
+     * @type {number}
+     */
+    protected cacheLimit = 100
 
     /**
      * An observable stream for the 'query' state.
@@ -128,13 +134,7 @@ export class QueryResultStore<
      * @returns {string} The cache key for the current query.
      */
     private getCacheKey(): string {
-        return qs.stringify(
-            omitBy(this.getQuery(), (value) => value === undefined),
-            {
-                encode: false,
-                sort: (a, b) => a.localeCompare(b),
-            },
-        )
+        return serializeObject(this.getQuery(), true)
     }
 
     /**
@@ -159,6 +159,9 @@ export class QueryResultStore<
      */
     cacheResult(result: R): void {
         if (!this.useCaching) return
+        if (this.cache.size >= Math.abs(this.cacheLimit)) {
+            removeOldestEntry(this.cache)
+        }
         this.cache.set(this.getCacheKey(), result)
     }
 
