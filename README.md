@@ -1,13 +1,23 @@
-**Simple Store**
-- **Overview:** Lightweight RxJS-based state utilities for TypeScript: `StateSubject`, `SimpleStore`, and `QueryResultStore`.
-- **Why:** Minimal, predictable state with deep-equality emissions, selection by key, and optional query-result caching.
+# Simple Store
 
-- **Peer deps:** Requires `rxjs`, `es-toolkit`, and `qs`.
+## Overview
+Lightweight RxJS-based state utilities for TypeScript:
 
+- `StateSubject<T>`: Deep-equality BehaviorSubject with reset. Only emits if a value has truly changed.
+- `SimpleStore<T extends Record<string, unknown>>`: Keyed selection and immutable partial updates.
+- `QueryResultStore<Q,R,T>`: Manage `query`, `result`, and `transient` with cache by query.
 
-**Quick Start**
-- **StateSubject:** Deep-equality BehaviorSubject with reset. Only emits if a value has truly changed.
-```
+### Peer deps
+- `rxjs`
+- `es-toolkit`
+- `qs`
+- `serialize-javascript`
+
+## Quick Start
+### StateSubject
+Deep-equality BehaviorSubject with reset. Only emits if a value has truly changed.
+
+```typescript
 import { StateSubject } from 'simple-store'
 
 const counter$ = new StateSubject({ count: 0 })
@@ -16,8 +26,10 @@ counter$.update({ count: 1 })
 counter$.reset() // back to { count: 0 }
 ```
 
-- **SimpleStore:** Keyed selection and immutable partial updates.
-```
+### SimpleStore
+Keyed selection and immutable partial updates.
+
+```typescript
 import { SimpleStore } from 'simple-store'
 
 type AppState = { user: { name: string }, theme: 'light' | 'dark' }
@@ -28,8 +40,10 @@ store.setState({ theme: 'dark' })
 store.destroy() // complete subscriptions bound with takeUntil
 ```
 
-- **QueryResultStore:** Manage `query`, `result`, and `transient` with cache by query.
-```
+### QueryResultStore
+Manage `query`, `result`, and `transient` with cache by query.
+
+```typescript
 import { QueryResultStore } from 'simple-store'
 
 type Query = { q?: string; page?: number }
@@ -50,7 +64,7 @@ qrs.setResult({ items: ['A', 'B'] }) // also caches by key
 const cached = qrs.getCachedResult() // -> { items: ['A','B'] }
 ```
 
-**API Reference**
+## API Reference
 - **`StateSubject<T>`:**
 	- **`value$`:** Observable<T> with deep `isEqual` change checks.
 	- **`update(value)`:** Push next value.
@@ -70,11 +84,6 @@ const cached = qrs.getCachedResult() // -> { items: ['A','B'] }
 	- **getters/setters:** `setQuery`, `getQuery`, `setResult`, `getResult`, `setTransient`, `getTransient`.
 	- **cache:** `getCacheKey()`, `getCachedResult()`, `cacheResult(result)`; cache key via `qs.stringify` of query (sorted, no `undefined`).
 
-**Notes**
-- **Emissions:** Deep equality via `es-toolkit/isEqual` prevents redundant emissions.
-- **Unsubscribe:** `SimpleStore.select*` streams complete on `destroy()`.
-- **Cache key:** Deterministic across param order; excludes `undefined` values.
-- **Type safety:** Fully generic; align your `Q`, `R`, and `T` types.
 
-**License**
-- MIT
+## License
+MIT
