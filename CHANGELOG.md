@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.1.0
+
+- Remove StateSubject class (if you need it, use it from [rxjs-state-subject](https://www.npmjs.com/package/rxjs-state-subject))
+- Update packages
+
 ## 1.0.4
 
 - Add caching limit to QueryResultStore. Default is 100.

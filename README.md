@@ -3,7 +3,6 @@
 ## Overview
 Lightweight RxJS-based state utilities for TypeScript:
 
-- `StateSubject<T>`: Deep-equality BehaviorSubject with reset. Only emits if a value has truly changed.
 - `SimpleStore<T extends Record<string, unknown>>`: Keyed selection and immutable partial updates.
 - `QueryResultStore<Q,R,T>`: Manage `query`, `result`, and `transient` with cache by query.
 
@@ -12,19 +11,9 @@ Lightweight RxJS-based state utilities for TypeScript:
 - `es-toolkit`
 - `qs`
 - `serialize-javascript`
+- `rxjs-state-subject`
 
 ## Quick Start
-### StateSubject
-Deep-equality BehaviorSubject with reset. Only emits if a value has truly changed.
-
-```typescript
-import { StateSubject } from 'simple-store'
-
-const counter$ = new StateSubject({ count: 0 })
-counter$.value$.subscribe(console.log) // emits only on deep changes
-counter$.update({ count: 1 })
-counter$.reset() // back to { count: 0 }
-```
 
 ### SimpleStore
 Keyed selection and immutable partial updates.
@@ -65,10 +54,6 @@ const cached = qrs.getCachedResult() // -> { items: ['A','B'] }
 ```
 
 ## API Reference
-- **`StateSubject<T>`:**
-	- **`value$`:** Observable<T> with deep `isEqual` change checks.
-	- **`update(value)`:** Push next value.
-	- **`reset()`:** Reset to initial value.
 
 - **`SimpleStore<T extends Record<string, unknown>>`:**
 	- **`constructor(initial, unsubscriber?)`:** Optional `Subject<void>` for teardown.
